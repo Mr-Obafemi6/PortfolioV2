@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TechIcon, { hasIcon } from './TechIcon.jsx'
+import BusinessCard from './BusinessCard.jsx'
 import { profile, savoirFaire, technos, outils, parcours } from '../data.js'
 
 function CardGrid({ items }) {
@@ -106,6 +107,8 @@ export function Contact() {
               <a key={l.label} href={l.href} target="_blank" rel="noreferrer">{l.label}</a>
             ))}
           </div>
+
+          <BusinessCard />
         </div>
 
         <form className="form" onSubmit={submit}>

@@ -53,7 +53,7 @@ export default function App() {
         </Routes>
       </main>
 
-      <footer className="foot">© {new Date().getFullYear()} {profile.name}</footer>
+      <footer className="foot">{new Date().getFullYear()} {profile.name}</footer>
     </>
   )
 }
