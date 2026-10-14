@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Cursor from './components/Cursor.jsx'
+import ErrorBoundary from './components/ErrorBoundary.jsx'
 import Intro from './components/Intro.jsx'
 import Nav from './components/Nav.jsx'
 import Projects from './components/Projects.jsx'
@@ -10,7 +11,14 @@ import { profile } from './data.js'
 
 function ScrollTop() {
   const { pathname } = useLocation()
-  useEffect(() => window.scrollTo(0, 0), [pathname])
+  useEffect(() => {
+    // Remontée instantanée, compatible avec tous les navigateurs (anciens Safari/Android inclus)
+    const el = document.documentElement
+    const prev = el.style.scrollBehavior
+    el.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+    el.style.scrollBehavior = prev
+  }, [pathname])
   return null
 }
 
@@ -42,6 +50,7 @@ export default function App() {
       <ScrollTop />
 
       <main className="page" key={pathname}>
+        <ErrorBoundary>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profil" element={<Profil />} />
@@ -51,6 +60,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
         </Routes>
+        </ErrorBoundary>
       </main>
 
       <footer className="foot">{new Date().getFullYear()} {profile.name}</footer>

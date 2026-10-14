@@ -1,6 +1,9 @@
 // ✏️ Tout le contenu du site est ici.
+// Ancien site : utilisé seulement pour le CV (à rapatrier dans public/cv/ quand vous aurez le PDF)
 const SITE = 'https://portfolio-obafemi-tchalla-neon-one.vercel.app/'
-const img = (f) => `url("${encodeURI(SITE + 'img/' + f)}")`
+// Images hébergées dans ce projet (dossier public/img)
+const BASE = import.meta.env.BASE_URL
+const img = (f) => `url("${BASE}img/${f}")`
 const NONE = 'linear-gradient(transparent, transparent)'
 
 export const profile = {
@@ -17,7 +20,7 @@ export const profile = {
   email: 'gerardtchalla6@gmail.com',
   phone: '+228 91 18 66 37',
   phoneHref: 'tel:+22891186637',
-  photo: SITE + 'img/profile.jpg',
+  photo: BASE + 'img/profile.webp',
   cv: SITE + 'cv/cv-gerard-tchalla.pdf',
   heroStack: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL', 'Git', 'GitHub', 'PWA', 'Laravel'],
   learning: ['React', 'Symfony'],
@@ -36,7 +39,7 @@ export const projects = [
     text: 'Site de vente et livraison de PC en ligne.',
     stack: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
     links: [{ label: 'GitHub', href: 'https://github.com/Mr-Obafemi6/Mon-Projet-PCHome' }],
-    img: img('WhatsApp Image 2026-01-20 at 20.31.03.jpeg'),
+    img: img('pchome.webp'),
     c1: '#2dd4bf', c2: '#1e3a8a',
   },
   {
@@ -45,10 +48,10 @@ export const projects = [
     text: 'Portfolio moderne et responsive pour présenter mes compétences et projets.',
     stack: ['HTML', 'CSS', 'JavaScript'],
     links: [
-      { label: 'Démo', href: SITE },
+      { label: 'Démo', href: 'https://tchallaobadev.vercel.app' },
       { label: 'GitHub', href: 'https://github.com/Mr-Obafemi6/Mon-Portfolio' },
     ],
-    img: img('WhatsApp Image 2026-01-20 at 20.46.1.jpeg'),
+    img: img('portfolio.webp'),
     c1: '#f472b6', c2: '#4c1d95',
   },
   {
@@ -57,7 +60,7 @@ export const projects = [
     text: 'Application de gestion de stock, ventes et informations de boutique.',
     stack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
     links: [{ label: 'GitHub', href: 'https://github.com/Mr-Obafemi6/gestion_boutique.git' }],
-    img: img('image.png'),
+    img: img('boutique.webp'),
     c1: '#fde047', c2: '#b91c1c',
   },
   {
@@ -66,7 +69,7 @@ export const projects = [
     text: 'Application web de gestion de tâches.',
     stack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
     links: [{ label: 'GitHub', href: 'https://github.com/Mr-Obafemi6/Gestion-des-t-ches.git' }],
-    img: img('gest.tâche.jpeg'),
+    img: img('taches.webp'),
     c1: '#ffb347', c2: '#7a1fa2',
   },
   {
@@ -75,7 +78,7 @@ export const projects = [
     text: 'Application web de calculatrice complexe.',
     stack: ['C++', 'C#', 'HTML', 'JavaScript', 'Bootstrap'],
     links: [{ label: 'GitHub', href: 'https://github.com/Mr-Obafemi6/Calculatrice_Complexe.git' }],
-    img: img('Calculatrice ℂ - Google Chrome 04_03_2026 18_02_04.png'),
+    img: img('calculatrice.webp'),
     c1: '#60a5fa', c2: '#0f172a',
   },
   {
@@ -84,7 +87,7 @@ export const projects = [
     text: "Application web de gestion d'école.",
     stack: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
     links: [],
-    img: img('image copy.png'),
+    img: img('sge.webp'),
     c1: '#34d399', c2: '#064e3b',
   },
 ]

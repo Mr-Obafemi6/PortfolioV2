@@ -17,10 +17,16 @@ export default function Folder() {
       el.style.setProperty('--o', 0.4)
       return
     }
+    if (!fine) {
+      // Téléphone : éventail ouvert + léger balancement en CSS (pas de calcul JS en continu)
+      el.style.setProperty('--o', 0.55)
+      el.classList.add('sway')
+      return
+    }
 
     let tx = 0, ty = 0, to = 0
     let x = 0, y = 0, o = 0
-    let raf, t = 0
+    let raf = 0, t = 0
 
     const move = (e) => {
       tx = e.clientX / innerWidth - 0.5
@@ -28,6 +34,7 @@ export default function Folder() {
       const r = el.getBoundingClientRect()
       const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2))
       to = Math.max(0, Math.min(1, 1.15 - d / (r.width * 0.9)))
+      if (!raf) raf = requestAnimationFrame(loop)
     }
     if (fine) addEventListener('pointermove', move)
 
@@ -44,9 +51,10 @@ export default function Folder() {
       el.style.setProperty('--rx', `${-y * 22}deg`)
       el.style.setProperty('--ry', `${x * 30}deg`)
       el.style.setProperty('--o', o.toFixed(3))
-      raf = requestAnimationFrame(loop)
+      const idle = fine && Math.abs(tx - x) < 0.0005 && Math.abs(ty - y) < 0.0005 && Math.abs(to - o) < 0.0005
+      raf = idle ? 0 : requestAnimationFrame(loop)
     }
-    loop()
+    raf = requestAnimationFrame(loop)
 
     return () => {
       cancelAnimationFrame(raf)

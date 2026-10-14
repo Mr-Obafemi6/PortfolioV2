@@ -10,12 +10,13 @@ export default function Cursor() {
     document.documentElement.classList.add('has-cursor')
 
     let x = innerWidth / 2, y = innerHeight / 2
-    let tx = x, ty = y, rot = 0, raf
+    let tx = x, ty = y, rot = 0, raf = 0
 
     const move = (e) => {
       tx = e.clientX
       ty = e.clientY
       el.style.opacity = 1
+      if (!raf) raf = requestAnimationFrame(loop)
     }
     const over = (e) =>
       el.classList.toggle('is-hover', !!e.target.closest('a, button, [data-hover]'))
@@ -29,9 +30,10 @@ export default function Cursor() {
       y += dy * 0.2
       rot += (Math.max(-35, Math.min(35, dx * 0.5)) - rot) * 0.15
       el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rot}deg)`
-      raf = requestAnimationFrame(loop)
+      // Au repos, on arrête la boucle (économise le processeur)
+      raf = Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1 && Math.abs(rot) < 0.1 ? 0 : requestAnimationFrame(loop)
     }
-    loop()
+    raf = requestAnimationFrame(loop)
 
     addEventListener('pointermove', move)
     addEventListener('mouseover', over)

@@ -6,6 +6,7 @@ function ProjectCard({ p }) {
   const ref = useRef(null)
 
   const onMove = (e) => {
+    if (e.pointerType !== 'mouse') return
     const el = ref.current
     const r = el.getBoundingClientRect()
     const px = (e.clientX - r.left) / r.width

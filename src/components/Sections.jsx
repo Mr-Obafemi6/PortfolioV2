@@ -24,7 +24,7 @@ export function Profil() {
     <section className="block">
       <h2>À propos de moi</h2>
       <div className="about">
-        <img className="portrait" src={profile.photo} alt={`Portrait de ${profile.name}`} />
+        <img className="portrait" decoding="async" width="800" height="1067" src={profile.photo} alt={`Portrait de ${profile.name}`} />
         <div>
           <p className="lead">{profile.role}</p>
           <p className="text">{profile.about}</p>
